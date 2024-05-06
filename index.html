@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Bascelli Mattia" />
+
+    <title>Calcolatrice</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('img/sfondoWindows.jpg') fixed;
+            background-size: cover;
+        }
+
+        .calcolatrice {
+            background-color: lightgray;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 1px 20px 20px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .barra {
+            margin: 3px;
+            padding: 0 3px 0 1px;
+            background-color: blue;
+            color: white;
+        }
+        .barra p{
+            padding:0 0 0 3px;
+        }
+        .x {
+            float: right;
+            margin: 18px;
+        }
+
+        .calcolatrice table {
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .image {
+            text-align: center;
+        }
+
+            .image img {
+                max-width: 250px;
+                width: 100%;
+                height: auto;
+            }
+
+        .messaggio {
+            background-color: lemonchiffon;
+            max-width: 380px;
+            width: 100%;
+            height: 80px;
+            margin-bottom: 5px;
+            padding: 5px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="calcolatrice">
+        <div class="x"><img src="img/x.jpg" /></div>
+        <div class="barra">
+            <p><strong>Calcolatrice</strong></p>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    Inserisci il primo numero:
+                </td>
+                <td>
+                    <input type="number" id="numero1" /><br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Inserisci il secondo numero:
+                </td>
+                <td>
+                    <input type="number" id="numero2" />
+                </td>
+            </tr>
+        </table>
+
+        <p><strong>Scegli la tua operazione:</strong></p>
+        <select id="operazione">
+            <option value="----">Seleziona</option>
+            <option value="addizione">ADDIZIONE</option>
+            <option value="sottrazione">SOTTRAZIONE</option>
+            <option value="moltiplicazione">MOLTIPLICAZIONE</option>
+            <option value="divisione">DIVISIONE</option>
+        </select>
+        <button onclick="calcolo()">Calcola</button>
+        <button onclick="cancella()">Cancella</button>
+        <hr />
+        <p id="totale"></p>
+        <div class="image">
+            <div class="messaggio">
+                <p id="messaggio">Ciao! Io sono Clippy!<br /> E ti aiuterò con le operazioni matematiche!</p>
+            </div>
+            <img src="img/clippy.png" id="clippy" />
+        </div>
+        <hr />
+        <footer>&copy; team 1 2024 - Calcolatrice 1.0</footer>
+    </div>
+
+    <!--Script-->
+    <script>
+        function calcolo() {
+            var numero1 = parseFloat(document.getElementById("numero1").value);
+            var numero2 = parseFloat(document.getElementById("numero2").value);
+            var operazione = document.getElementById("operazione");
+            var scelta = operazione.value;
+            var risultato = 0;
+            var totale = document.getElementById("totale");
+
+            if (isNaN(numero1) || isNaN(numero2)) {
+                //Messaggio di notifica e variazione Immagine
+                messaggio.innerHTML = "Non fare il furbo! Inserisci entrambi i numeri!";
+                clippy.src = "img/clippy2.png";
+            } else { 
+            switch (scelta) {
+                case "addizione":
+                    risultato = numero1 + numero2;
+                    messaggio.innerHTML = "Il risultato dell'addizione è " + risultato + "!";
+                    clippy.src = "img/clippy.png";
+                    break;
+                case "sottrazione":
+                    risultato = numero1 - numero2;
+                    messaggio.innerHTML = "Il risultato della sottrazione è " + risultato + "!";
+                    clippy.src = "img/clippy.png";
+                    break;
+                case "moltiplicazione":
+                    risultato = numero1 * numero2;
+                    messaggio.innerHTML = "Il risultato della moltiplicazione è " + risultato + "!";
+                    clippy.src = "img/clippy.png";
+                    break;
+                case "divisione":
+                    risultato = numero1 / numero2;
+                    messaggio.innerHTML = "Il risultato della divisione è " + risultato + "!";
+                    clippy.src = "img/clippy.png";
+                    break;
+                default:
+                    //Messaggio di notifica e variazione Immagine
+                    messaggio.innerHTML = "Se non selezioni un'operazione non posso aiutarti! Riprova!";
+                    clippy.src = "img/clippy3.png";
+                } 
+            }
+        }
+        
+        function cancella() { 
+            document.getElementById("numero1").value = "";
+            document.getElementById("numero2").value = "";
+            messaggio.innerHTML = "Ora che abbiamo pulito possiamo fare una nuova operazione!";
+            clippy.src = "img/clippy.png";
+        }
+    </script>
+</body>
+</html>
